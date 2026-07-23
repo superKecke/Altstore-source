@@ -1,0 +1,16 @@
+{
+  "name": "My AltStore Repo",
+  "identifier": "com.deinname.altstore",
+  "apps": [
+    {
+      "name": "AnymeX",
+      "bundleIdentifier": "com.ryanyuuki.anymex",
+      "developerName": "RyanYuuki",
+      "version": "",
+      "versionDate": "",
+      "downloadURL": "",
+      "iconURL": "https://raw.githubusercontent.com/RyanYuuki/AnymeX/main/assets/icon.png",
+      "localizedDescription": "AnymeX"
+    }
+  ]
+}
