@@ -1,16 +1,30 @@
 {
-  "name": "My AltStore Repo",
-  "identifier": "com.deinname.altstore",
+  "name": "AnymeX",
+  "subtitle": "Automatic AnymeX Updates",
+  "description": "Automatically tracks the latest AnymeX GitHub release.",
+  "iconURL": "https://raw.githubusercontent.com/RyanYuuki/AnymeX/main/assets/icon.png",
+  "headerURL": "https://raw.githubusercontent.com/RyanYuuki/AnymeX/main/assets/banner.png",
+  "website": "https://github.com/RyanYuuki/AnymeX",
+  "patreonURL": "",
+  "tintColor": "#4F46E5",
+  "featuredApps": [
+    "com.ryanyuuki.anymex"
+  ],
   "apps": [
     {
       "name": "AnymeX",
       "bundleIdentifier": "com.ryanyuuki.anymex",
       "developerName": "RyanYuuki",
-      "version": "v3.1.0",
-      "versionDate": "2026-07-19",
-      "downloadURL": "https://github.com/RyanYuuki/AnymeX/releases/download/v3.1.0/AnymeX-iOS-v3.1.0.ipa",
-      "iconURL": "https://raw.githubusercontent.com/RyanYuuki/AnymeX/main/assets/images/logo.png",
-      "localizedDescription": "AnymeX"
+      "subtitle": "Anime Streaming",
+      "localizedDescription": "Automatically updated from the latest GitHub release.",
+      "iconURL": "https://raw.githubusercontent.com/RyanYuuki/AnymeX/main/assets/icon.png",
+      "version": "",
+      "versionDate": "",
+      "versionDescription": "",
+      "downloadURL": "",
+      "size": 0,
+      "screenshots": []
     }
-  ]
+  ],
+  "news": []
 }
