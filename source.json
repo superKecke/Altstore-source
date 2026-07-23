@@ -2,22 +2,22 @@
   "name": "AnymeX",
   "subtitle": "Automatic AnymeX Updates",
   "description": "Automatically tracks the latest AnymeX GitHub release.",
-  "iconURL": "https://raw.githubusercontent.com/RyanYuuki/AnymeX/main/assets/icon.png",
+  "iconURL": "https://raw.githubusercontent.com/RyanYuuki/AnymeX/main/assets/logo.png",
   "headerURL": "https://raw.githubusercontent.com/RyanYuuki/AnymeX/main/assets/banner.png",
   "website": "https://github.com/RyanYuuki/AnymeX",
   "patreonURL": "",
   "tintColor": "#4F46E5",
   "featuredApps": [
-    "com.ryanyuuki.anymex"
+    "com.ryan.anymex"
   ],
   "apps": [
     {
       "name": "AnymeX",
-      "bundleIdentifier": "com.ryanyuuki.anymex",
+      "bundleIdentifier": "com.ryan.anymex",
       "developerName": "RyanYuuki",
       "subtitle": "Anime Streaming",
       "localizedDescription": "Automatically updated from the latest GitHub release.",
-      "iconURL": "https://raw.githubusercontent.com/RyanYuuki/AnymeX/main/assets/icon.png",
+      "iconURL": "https://raw.githubusercontent.com/RyanYuuki/AnymeX/main/assets/logo.png",
       "version": "",
       "versionDate": "",
       "versionDescription": "",
