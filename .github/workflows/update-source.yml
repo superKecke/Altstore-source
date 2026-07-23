@@ -1,9 +1,9 @@
-name: Update AltStore Source
+name: Update AnymeX Source
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/30 * * * *" # alle 30 Minuten
+    - cron: "*/30 * * * *"
 
 permissions:
   contents: write
@@ -16,8 +16,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Get latest AnymeX release
-        id: release
+      - name: Fetch latest AnymeX release
+        id: latest
         uses: actions/github-script@v7
         with:
           script: |
@@ -26,39 +26,47 @@ jobs:
               repo: "AnymeX"
             });
 
-            const ipa = release.data.assets.find(a => a.name.endsWith(".ipa"));
+            const ipa = release.data.assets.find(asset =>
+              asset.name.toLowerCase().endsWith(".ipa")
+            );
 
             if (!ipa) {
-              core.setFailed("No IPA asset found.");
+              core.setFailed("No IPA asset found in latest release.");
               return;
             }
 
             core.setOutput("version", release.data.tag_name);
-            core.setOutput("url", ipa.browser_download_url);
-            core.setOutput("date", release.data.published_at.substring(0,10));
+            core.setOutput("date", release.data.published_at);
+            core.setOutput("notes", release.data.body || "");
+            core.setOutput("download", ipa.browser_download_url);
+            core.setOutput("size", ipa.size);
 
       - name: Update source.json
+        env:
+          VERSION: ${{ steps.latest.outputs.version }}
+          DATE: ${{ steps.latest.outputs.date }}
+          NOTES: ${{ steps.latest.outputs.notes }}
+          DOWNLOAD: ${{ steps.latest.outputs.download }}
+          SIZE: ${{ steps.latest.outputs.size }}
         run: |
           node <<'EOF'
           const fs = require("fs");
 
-          const version = process.env.VERSION;
-          const url = process.env.URL;
-          const date = process.env.DATE;
+          const source = JSON.parse(fs.readFileSync("source.json", "utf8"));
 
-          const file = "source.json";
-          const json = JSON.parse(fs.readFileSync(file, "utf8"));
+          const app = source.apps[0];
 
-          json.apps[0].version = version;
-          json.apps[0].versionDate = date;
-          json.apps[0].downloadURL = url;
+          app.version = process.env.VERSION;
+          app.versionDate = process.env.DATE;
+          app.versionDescription = process.env.NOTES;
+          app.downloadURL = process.env.DOWNLOAD;
+          app.size = Number(process.env.SIZE);
 
-          fs.writeFileSync(file, JSON.stringify(json, null, 2));
+          fs.writeFileSync(
+            "source.json",
+            JSON.stringify(source, null, 2) + "\n"
+          );
           EOF
-        env:
-          VERSION: ${{ steps.release.outputs.version }}
-          URL: ${{ steps.release.outputs.url }}
-          DATE: ${{ steps.release.outputs.date }}
 
       - name: Commit changes
         run: |
@@ -68,9 +76,9 @@ jobs:
           git add source.json
 
           if git diff --cached --quiet; then
-            echo "No changes."
+            echo "No changes detected."
             exit 0
           fi
 
-          git commit -m "Update AnymeX to ${{ steps.release.outputs.version }}"
+          git commit -m "Update AnymeX to ${{ steps.latest.outputs.version }}"
           git push
