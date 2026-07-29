@@ -3,7 +3,7 @@ name: Update AnymeX Source
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "*/60 * * * *"
 
 permissions:
   contents: write
