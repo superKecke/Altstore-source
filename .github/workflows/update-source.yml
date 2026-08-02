@@ -35,7 +35,9 @@ jobs:
               return;
             }
 
-            core.setOutput("version", release.data.tag_name);
+            const version = release.data.tag_name.replace(/^v/i, "");
+
+            core.setOutput("version", version);
             core.setOutput("date", release.data.published_at);
             core.setOutput("notes", release.data.body || "");
             core.setOutput("download", ipa.browser_download_url);
